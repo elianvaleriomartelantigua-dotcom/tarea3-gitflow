@@ -1,5 +1,7 @@
 let tasks = [];
 
+let statuses = [];
+
 
 function addTask(){
 
@@ -10,6 +12,7 @@ function addTask(){
     }
 
     tasks.push(input.value);
+    statuses.push("Pendiente");
 
     render();
 
@@ -37,6 +40,7 @@ function updateTask(index){
 function deleteTask(index){
 
     tasks.splice(index,1);
+    statuses.splice(index,1);
 
     render();
 
@@ -44,15 +48,19 @@ function deleteTask(index){
 
 
 
-function searchTask(){
+function changeStatus(index){
 
-    let text = prompt("Buscar tarea:");
+    if(statuses[index] === "Pendiente"){
 
-    let results = tasks.filter(task =>
-        task.toLowerCase().includes(text.toLowerCase())
-    );
+        statuses[index] = "Completada";
 
-    alert(results.join("\n"));
+    }else{
+
+        statuses[index] = "Pendiente";
+
+    }
+
+    render();
 
 }
 
@@ -72,7 +80,8 @@ function render(){
 
         <li>
 
-        ${task}
+        ${task} - ${statuses[index]}
+
 
         <button onclick="updateTask(${index})">
         Editar
@@ -81,6 +90,11 @@ function render(){
 
         <button onclick="deleteTask(${index})">
         Eliminar
+        </button>
+
+
+        <button onclick="changeStatus(${index})">
+        Estado
         </button>
 
 
