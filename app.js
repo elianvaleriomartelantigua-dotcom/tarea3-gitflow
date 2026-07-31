@@ -44,6 +44,20 @@ function deleteTask(index){
 
 
 
+function searchTask(){
+
+    let text = prompt("Buscar tarea:");
+
+    let results = tasks.filter(task =>
+        task.toLowerCase().includes(text.toLowerCase())
+    );
+
+    alert(results.join("\n"));
+
+}
+
+
+
 function render(){
 
     let list = document.getElementById("taskList");
